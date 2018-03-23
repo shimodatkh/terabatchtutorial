@@ -1,5 +1,7 @@
 package org.terasoluna.batch.tutorial.common.dto;
 
+import javax.validation.constraints.Max;
+
 public class MemberInfoDto {
     private String id; // (1)
 
@@ -7,6 +9,7 @@ public class MemberInfoDto {
 
     private String status; // (3)
 
+    @Max(1000000)
     private int point; // (4)
 
     public String getId() {

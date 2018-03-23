@@ -1,6 +1,9 @@
 package org.terasoluna.batch.tutorial.dbaccess.chunk;
 
+import javax.inject.Inject;
+
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.validator.Validator;
 import org.springframework.stereotype.Component;
 import org.terasoluna.batch.tutorial.common.dto.MemberInfoDto;
 
@@ -17,8 +20,14 @@ public class PointAddItemProcessor implements ItemProcessor<MemberInfoDto, Membe
 
     private static final int MAX_POINT = 1000000; // (7)
     
+    @Inject // (1)
+    Validator<MemberInfoDto> validator; // (2)
+    
 	@Override
 	public MemberInfoDto process(MemberInfoDto item) throws Exception {
+		
+		validator.validate(item); // (3)
+		
 		if (TARGET_STATUS.equals(item.getStatus())) {
 			if (GOLD_MEMBER.equals(item.getType())) {
 				item.setPoint(item.getPoint() + 100);
