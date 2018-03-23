@@ -14,7 +14,8 @@
     <import resource="classpath:META-INF/spring/job-base-context.xml"/>
 
     <!-- (2) -->
-    <context:component-scan base-package="org.terasoluna.batch.tutorial.dbaccess.chunk"/>
+    <context:component-scan base-package="org.terasoluna.batch.tutorial.dbaccess.chunk,
+            org.terasoluna.batch.tutorial.common.listener"/> <!-- (1) -->
     <!-- (1) -->
     <mybatis:scan base-package="org.terasoluna.batch.tutorial.common.repository" factory-ref="jobSqlSessionFactory"/>
 
@@ -35,6 +36,9 @@
                 <batch:chunk reader="reader"
                              processor="pointAddItemProcessor"
                              writer="writer" commit-interval="10"/> <!-- (3) -->
+                <batch:listeners>
+                    <batch:listener ref="chunkErrorLoggingListener"/> <!--(2)-->
+                </batch:listeners>
             </batch:tasklet>
         </batch:step>
     </batch:job>
