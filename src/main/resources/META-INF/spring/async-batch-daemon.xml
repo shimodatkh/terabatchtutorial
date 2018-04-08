@@ -52,7 +52,7 @@
     <bean id="automaticJobRegistrar" class="org.springframework.batch.core.configuration.support.AutomaticJobRegistrar">
         <property name="applicationContextFactories">
             <bean class="org.springframework.batch.core.configuration.support.ClasspathXmlApplicationContextsFactoryBean"
-                p:resources="classpath:/META-INF/jobs/**/*.xml" />
+                p:resources="classpath:/META-INF/jobs/dbaccess/jobPointAddChunk.xml" />
         </property>
         <property name="jobLoader">
             <bean class="org.springframework.batch.core.configuration.support.DefaultJobLoader"
