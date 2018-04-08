@@ -37,10 +37,13 @@
                              processor="pointAddItemProcessor"
                              writer="writer" commit-interval="10"/> <!-- (3) -->
                 <batch:listeners>
-                    <batch:listener ref="chunkErrorLoggingListener"/> <!--(2)-->
+                    <batch:listener ref="exitStatusChangeListener"/> <!--(2)-->
                 </batch:listeners>
             </batch:tasklet>
         </batch:step>
+        <batch:listeners>
+            <batch:listener ref="jobExitCodeChangeListener"/> <!-- (3) -->
+        </batch:listeners>
     </batch:job>
 </beans>
 
